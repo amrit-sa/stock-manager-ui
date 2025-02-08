@@ -1,14 +1,3 @@
-/*!
-=========================================================
-* Muse Ant Design Dashboard - v1.0.0
-=========================================================
-* Product Page: https://www.creative-tim.com/product/muse-ant-design-dashboard
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/muse-ant-design-dashboard/blob/main/LICENSE.md)
-* Coded by Creative Tim
-=========================================================
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
 import React, { Component } from "react";
 import {
   Layout,
@@ -114,7 +103,11 @@ const signin = [
     />
   </svg>,
 ];
+
+const PRODUCT_NAME  = import.meta.env.VITE_PRODUCT_NAME;
+
 export default class SignUp extends Component {
+
   render() {
     const onFinish = (values) => {
       console.log("Success:", values);
@@ -128,38 +121,7 @@ export default class SignUp extends Component {
         <div className="layout-default ant-layout layout-sign-up">
           <Header>
             <div className="header-col header-brand">
-              <h5>Muse Dashboard</h5>
-            </div>
-            <div className="header-col header-nav">
-              <Menu mode="horizontal" defaultSelectedKeys={["1"]}>
-                <Menu.Item key="1">
-                  <Link to="/dashboard">
-                    {template}
-                    <span> Dashboard</span>
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="2">
-                  <Link to="/profile">
-                    {profile}
-                    <span>Profile</span>
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="3">
-                  <Link to="/sign-up">
-                    {signup}
-                    <span> Sign Up</span>
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="4">
-                  <Link to="/sign-in">
-                    {signin}
-                    <span> Sign In</span>
-                  </Link>
-                </Menu.Item>
-              </Menu>
-            </div>
-            <div className="header-col header-btn">
-              <Button type="false">FREE DOWNLOAD</Button>
+              <h5>{PRODUCT_NAME}</h5>
             </div>
           </Header>
 
@@ -167,19 +129,15 @@ export default class SignUp extends Component {
             <div className="sign-up-header">
               <div className="content">
                 <Title>Sign Up</Title>
-                <p className="text-lg">
-                  Use these awesome forms to login or create new account in your
-                  project for free.
-                </p>
-              </div>
-            </div>
+               
+            
 
             <Card
               className="card-signup header-solid h-full ant-card pt-0"
-              title={<h5>Register With</h5>}
+              // title={<h5>Register With</h5>}
               bordered="false"
             >
-              <div className="sign-up-gateways">
+              {/* <div className="sign-up-gateways">
                 <Button type="false">
                   <img src={logo1} alt="logo 1" />
                 </Button>
@@ -189,8 +147,8 @@ export default class SignUp extends Component {
                 <Button type="false">
                   <img src={logo3} alt="logo 3" />
                 </Button>
-              </div>
-              <p className="text-center my-25 font-semibold text-muted">Or</p>
+              </div> */}
+              {/* <p className="text-center my-5 font-semibold text-muted">Or</p> */}
               <Form
                 name="basic"
                 initialValues={{ remember: true }}
@@ -212,7 +170,7 @@ export default class SignUp extends Component {
                     { required: true, message: "Please input your email!" },
                   ]}
                 >
-                  <Input placeholder="email" />
+                  <Input placeholder="Email" />
                 </Form.Item>
                 <Form.Item
                   name="password"
@@ -220,7 +178,7 @@ export default class SignUp extends Component {
                     { required: true, message: "Please input your password!" },
                   ]}
                 >
-                  <Input placeholder="Passwoed" />
+                  <Input placeholder="Password" />
                 </Form.Item>
 
                 <Form.Item name="remember" valuePropName="checked">
@@ -249,8 +207,10 @@ export default class SignUp extends Component {
                 </Link>
               </p>
             </Card>
+            </div>
+            </div>
           </Content>
-          <Footer>
+          {/* <Footer>
             <Menu mode="horizontal">
               <Menu.Item>Company</Menu.Item>
               <Menu.Item>About Us</Menu.Item>
@@ -285,11 +245,8 @@ export default class SignUp extends Component {
                 <Link to="#">{<GithubOutlined />}</Link>
               </Menu.Item>
             </Menu>
-            <p className="copyright">
-              {" "}
-              Copyright © 2021 Muse by <a href="#pablo">Creative Tim</a>.{" "}
-            </p>
-          </Footer>
+           
+          </Footer> */}
         </div>
       </>
     );
