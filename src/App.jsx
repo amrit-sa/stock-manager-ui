@@ -12,7 +12,7 @@ import "./assets/styles/main.css";
 import "./assets/styles/responsive.css";
 import Organization from "./pages/organization/organization";
 import Categories from "./pages/category";
-import Brands from "./pages/brands/Brands";
+import Brands from "./pages/brands";
 import Products from "./pages/products/products";
 
 function App() {
