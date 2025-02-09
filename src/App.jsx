@@ -11,6 +11,9 @@ import Main from "./components/layout/Main";
 import "./assets/styles/main.css";
 import "./assets/styles/responsive.css";
 import Organization from "./pages/organization/organization";
+import Categories from "./pages/category/categories";
+import Brands from "./pages/brands/Brands";
+import Products from "./pages/products/products";
 
 function App() {
   return (
@@ -21,6 +24,9 @@ function App() {
         <Main>
         <Route exact path="/dashboard" component={Home} />
         <Route exact path="/organization" component={Organization} />
+        <Route exact path="/categories" component={Categories} />
+        <Route exact path="/products" component={Products} />
+        <Route exact path="/brands" component={Brands} />
         <Route exact path="/tables" component={Tables} />
           <Route exact path="/billing" component={Billing} />
           <Route exact path="/rtl" component={Rtl} />

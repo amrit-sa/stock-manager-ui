@@ -10,16 +10,50 @@ import {
     Form,
     message,
     Space,
+    Descriptions
 } from "antd";
 import { LinkOutlined, PlusOutlined, RightOutlined } from "@ant-design/icons";
 import card from "../../assets/images/info-card-1.jpg";
 import SimpleTable from "../../components/SimpleTable";
+import Categories from "../category/categories";
+import Paragraph from "antd/lib/typography/Paragraph";
+
+
+
+// const items = [
+//     {
+//       key: '1',
+//       label: 'UserName',
+//       children: 'Zhou Maomao',
+//     },
+//     {
+//       key: '2',
+//       label: 'Telephone',
+//       children: '1810000000',
+//     },
+//     {
+//       key: '3',
+//       label: 'Live',
+//       children: 'Hangzhou, Zhejiang',
+//     },
+//     {
+//       key: '4',
+//       label: 'Remark',
+//       children: 'empty',
+//     },
+//     {
+//       key: '5',
+//       label: 'Address',
+//       children: 'No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China',
+//     },
+//   ];
 
 const Organization = () => {
-    const { Title } = Typography;
+    const { Title, Text } = Typography;
 
     // State for Modal visibility
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [categoryShow, setCategoryShow] = useState(false);
 
     // State for organization ID input
     const [orgId, setOrgId] = useState("");
@@ -49,7 +83,6 @@ const Organization = () => {
                             Link your organization or create a new one
                         </Title>
                         <Row gutter={[16, 16]}>
-                            {/* Input and Link Section */}
                             <Col span={16}>
 
                                 <Space.Compact
@@ -71,7 +104,6 @@ const Organization = () => {
                                     </Button>
                                 </Space.Compact>
                             </Col>
-                            {/* Create Organization Button */}
                             <Col span={8}>
                                 <Button
                                     type="primary"
@@ -88,27 +120,59 @@ const Organization = () => {
 
             <Row gutter={[24, 0]}>
                 <Col xs={24} className="mb-24">
-                    <Card bordered={false} className="circlebox h-full">
+                    <Card bordered={false} className="criclebox h-full">
+                        <Row gutter>
+                            <Col
+                                xs={24}
+                                md={12}
+                                sm={24}
+                                lg={12}
+                                xl={14}
+                                className="mobile-24"
+                            >
+                                <div className="h-full col-content p-20">
+                                    <div className="ant-muse">
+                                        <Text>Your Organization:</Text>
+                                        <Title level={5}>ABC Enterprices</Title>
+                                        <Paragraph className="lastweek mb-36">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                        </Paragraph>
+                                    </div>
+                                    <div className="card-footer">
+                                        {!categoryShow && <a className="icon-move-right" href="#" onClick={() => setCategoryShow((prev) => !prev)}>
+                                            See Categories
+                                            {<RightOutlined />}
+                                        </a>}
+                                    </div>
+                                </div>
+                            </Col>
+                            <Col
+                                xs={24}
+                                md={12}
+                                sm={24}
+                                lg={12}
+                                xl={10}
+                                className="col-img"
+                            >
+                                <div className="ant-cret text-right">
+                                    <img src={card} alt="" className="border10" />
+                                </div>
+                            </Col>
 
-                        <Title className="font-regular text-muted pt-0" level={4}>
-                            Organization Name
-                        </Title>
+                            <Col xs={24}>
+                                {categoryShow && <Categories />}
+                            </Col>
+                        </Row>
                     </Card>
                 </Col>
-                <Col xs={24} className="mb-24">
-                    <Card bordered={false} className="circlebox h-full">
-                        <Title className="font-regular text-muted pt-0" level={5}>
-                            Categories
-                        </Title>
-                        <SimpleTable 
-                            // columns={categoriesColumn} 
-                            // data={categoriesData} 
-                        />
-                    </Card>
-                </Col>
+
+
+
+                
+
+
             </Row>
 
-            {/* Modal for Creating Organization */}
             <Modal
                 title="Create Organization"
                 visible={isModalVisible}
@@ -135,6 +199,8 @@ const Organization = () => {
                     </Form.Item>
                 </Form>
             </Modal>
+
+
         </div>
     );
 };
