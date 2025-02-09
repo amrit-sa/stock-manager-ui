@@ -15,7 +15,7 @@ import {
 import { LinkOutlined, PlusOutlined, RightOutlined } from "@ant-design/icons";
 import card from "../../assets/images/info-card-1.jpg";
 import SimpleTable from "../../components/SimpleTable";
-import Categories from "../category/categories";
+import Categories from "../category";
 import Paragraph from "antd/lib/typography/Paragraph";
 
 

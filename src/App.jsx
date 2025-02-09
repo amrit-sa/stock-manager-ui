@@ -11,7 +11,7 @@ import Main from "./components/layout/Main";
 import "./assets/styles/main.css";
 import "./assets/styles/responsive.css";
 import Organization from "./pages/organization/organization";
-import Categories from "./pages/category/categories";
+import Categories from "./pages/category";
 import Brands from "./pages/brands/Brands";
 import Products from "./pages/products/products";
 
