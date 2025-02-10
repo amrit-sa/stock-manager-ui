@@ -13,7 +13,7 @@ import "./assets/styles/responsive.css";
 import Organization from "./pages/organization/organization";
 import Categories from "./pages/category";
 import Brands from "./pages/brands";
-import Products from "./pages/products/products";
+import Products from "./pages/products";
 
 function App() {
   return (

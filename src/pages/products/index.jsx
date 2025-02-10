@@ -6,20 +6,17 @@ import {
     Typography,
     Button,
 } from "antd";
-import { CategoryTable } from "./CategoryTable";
-import { CategoryForm } from "./CategoryForm";
 import { withCard } from "../../hoc/withCardWrapper";
+import ProductsTable from "./ProductsTable";
+import { ProductsForm } from "./ProductsForm";
 
-const Categories = () => {
+const Products = () => {
     const { Title } = Typography;
 
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const FormWithCard = withCard(CategoryForm);
+    const FormWithCard = withCard(ProductsForm);
 
     const handleCloseFormEvent = () => setIsModalVisible(false)
-
-   
-
     return (
         <div>
             <Row gutter={[24, 0]}>
@@ -27,7 +24,7 @@ const Categories = () => {
                     <Card bordered={false} className="circlebox h-full">
                         {isModalVisible ?
                             <FormWithCard
-                                title={"Add/Update Category"}
+                                title={"Add/Update Products"}
                                 onClose={handleCloseFormEvent}
                             />
                             : <>
@@ -37,10 +34,10 @@ const Categories = () => {
                                         htmlType="button"
                                         onClick={() => setIsModalVisible(true)}
                                     >
-                                        Add a new Category
+                                        Add a new Products
                                     </Button>
                                 </Col>
-                                <CategoryTable />
+                                <ProductsTable />
                             </>
                         }
                     </Card>
@@ -50,4 +47,4 @@ const Categories = () => {
     );
 };
 
-export default Categories;
+export default Products;

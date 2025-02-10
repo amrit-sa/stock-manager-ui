@@ -10,7 +10,7 @@ import { withCard } from "../../hoc/withCardWrapper";
 import BrandsTable from "./BrandsTabls";
 import { BrandsForm } from "./BrandsForm";
 
-const Categories = () => {
+const Brands = () => {
     const { Title } = Typography;
 
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -47,4 +47,4 @@ const Categories = () => {
     );
 };
 
-export default Categories;
+export default Brands;

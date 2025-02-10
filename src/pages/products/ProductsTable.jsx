@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CustomTable from "../../components/CustomTable";
 import { Select } from "antd";
 
-const Products = () => {
+const ProductsTable = () => {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [selectedBrand, setSelectedBrand] = useState("");
 
@@ -88,4 +88,4 @@ const Products = () => {
     />;
 };
 
-export default Products;
+export default ProductsTable;
