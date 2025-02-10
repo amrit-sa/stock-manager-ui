@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import CustomTable from "../../components/CustomTable";
-import { Select } from "antd";
+import { Avatar, Select, Typography } from "antd";
+import ava1 from "../../assets/images/logo-shopify.svg";
 
+const { Title, Text } = Typography;
 const ProductsTable = () => {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [selectedBrand, setSelectedBrand] = useState("");
@@ -30,20 +32,59 @@ const ProductsTable = () => {
             key: "id",
         },
         {
-            title: "Product Name",
-            dataIndex: "name",
-            key: "name",
+            title: "Product",
+            dataIndex: "product",
+            key: "product",
+            render: (_, product) => (
+                <>
+                  <Avatar.Group>
+                    <Avatar
+                      className="shape-avatar"
+                      shape="square"
+                      size={40}
+                      src={product?.img || null}
+                    ></Avatar>
+                    <div className="avatar-info">
+                      <Title level={5}>{product.name || ''}</Title>
+                      <p>{product.description || ''}</p>
+                    </div>
+                  </Avatar.Group>{" "}
+                </>
+              )
         },
         {
-            title: "Price",
-            dataIndex: "price",
-            key: "price",
+            title: "Brand",
+            dataIndex: "brand",
+            key: "brand",
+        },
+        {
+            title: "Category",
+            dataIndex: "category",
+            key: "category",
+        },
+        {
+            title: "Status",
+            dataIndex: "status",
+            key: "status",
+            render: (status) => status? 'Active' : 'Inactive',
+        },
+        {
+            title: "",
+            dataIndex: "action",
+            key: "action",
+            render: (_, record) => (
+                <span>
+                    <a href="#">Edit</a>
+                    <span className="ant-divider" />
+                    <a href="#">Delete</a>
+                </span>
+            )
         },
     ];
 
     const data = [
-        { id: "1", name: "iPhone 13", price: "$799", category: "Electronics", brand: "Apple" },
-        { id: "2", name: "Air Max", price: "$150", category: "Clothing", brand: "Nike" },
+        { id: "1", name: "iPhone 13", img: ava1, price: "$799", category: "Electronics", brand: "Apple", description:"Sample product description..." },
+        { id: "2", name: "Air Max", img: ava1, price: "$150", category: "Clothing", brand: "Nike", description:"Sample product description..." },
     ].filter(
         (item) =>
             (!selectedCategory || item.category === selectedCategory) &&

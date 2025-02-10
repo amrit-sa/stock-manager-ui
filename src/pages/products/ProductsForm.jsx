@@ -1,161 +1,157 @@
 import React, { useState } from "react";
-import { Button, Form, Input, Switch, Typography, Row, Col, message } from "antd";
+import { Button, Form, Input, Switch, Typography, Row, Col, message, Upload } from "antd";
 import { Select } from "antd";
-import TextArea from "antd/es/input/TextArea";
-
-const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-};
+import { PlusOutlined } from "@ant-design/icons";
 
 export const ProductsForm = () => {
-    const { Title } = Typography;
-    const [selectedCategory, setSelectedCategory] = useState("");
+  const { Title } = Typography;
+  const [form] = Form.useForm();
+  const [imagePreview, setImagePreview] = useState(null);
 
-    const handleCategoryFilter = (value) => {
-        if (value === 'all') {
-            setSelectedCategory(null);
-        } else {
-            setSelectedCategory(value);
-        }
-        // Apply filtering logic here
-    };
-    const [form] = Form.useForm();
+  const filtersOptions = [
+    { label: "Electronics", value: "Electronics" },
+    { label: "Clothing", value: "Clothing" },
+  ];
 
-    const onFinish = (values) => {
-        console.log("Form Submitted:", values);
-        message.success("Category has been submitted successfully!");
-    };
+  const handleImageUpload = (info) => {
+    if (info.file.status === "done" || info.file.originFileObj) {
+      const file = info.file.originFileObj || info.file;
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
-    const onFinishFailed = (errorInfo) => {
-        console.log("Form Submission Failed:", errorInfo);
-        message.error("Please fix the errors in the form.");
-    };
+  const beforeUpload = (file) => {
+    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+    if (!isJpgOrPng) {
+      message.error("You can only upload JPG/PNG files!");
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      message.error("Image must smaller than 2MB!");
+    }
+    return isJpgOrPng && isLt2M;
+  };
 
-    const onSwitchChange = (checked) => {
-        console.log(`Switch toggled to: ${checked}`);
-    };
+  const onFinish = (values) => {
+    console.log("Form Submitted:", values);
+    message.success("Product has been submitted successfully!");
+  };
 
+  const onFinishFailed = (errorInfo) => {
+    console.log("Form Submission Failed:", errorInfo);
+    message.error("Please fix the errors in the form.");
+  };
 
-    const onChange = (value) => {
-        console.log(`selected ${value}`);
-    };
-    const onSearch = (value) => {
-        console.log('search:', value);
-    };
-
-
-    const filtersOptions = [
-        { label: "Electronics", value: "Electronics" },
-        { label: "Clothing", value: "Clothing" },
-    ];
-
-    return (
-        <div>
-            {/* <Title className="mb-15" level={5}>
-        Add/Update Category
-      </Title> */}
-            <Form
-                form={form}
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
-                layout="vertical"
-            // style={{ maxWidth: 800 }}
+  return (
+    <div>
+      <Form
+        form={form}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        layout="vertical"
+      >
+        {/* Category and Brand */}
+        <Row gutter={16}>
+          <Col span={10}>
+            <Form.Item
+              label="Category"
+              name="category"
+              rules={[{ required: true, message: "Please select a category!" }]}
             >
-                {/* Name and Description Inline */}
-                <Row gutter={16}>
-                    <Col span={10}>
-                        <Form.Item
-                            label="Category"
-                            name="category"
-                            rules={[
-                                { required: true, message: "Please select a category!" },
-                            ]}
-                        >
-                            <Select
-                                showSearch
-                                placeholder="Select a Category first"
-                                optionFilterProp="label"
-                                onChange={onChange}
-                                onSearch={onSearch}
-                                options={filtersOptions}
-                            />
-                        </Form.Item>
-                    </Col>
+              <Select
+                showSearch
+                placeholder="Select a Category"
+                optionFilterProp="label"
+                options={filtersOptions}
+              />
+            </Form.Item>
+          </Col>
+          <Col span={10}>
+            <Form.Item
+              label="Brand"
+              name="brand"
+              rules={[{ required: true, message: "Please select a brand!" }]}
+            >
+              <Select
+                showSearch
+                placeholder="Select a Brand"
+                optionFilterProp="label"
+                options={filtersOptions}
+              />
+            </Form.Item>
+          </Col>
+        </Row>
 
-                    <Col span={10}>
-                        <Form.Item
-                            label="Brand"
-                            name="brand"
-                            rules={[
-                                { required: true, message: "Please select a brand!" },
-                            ]}
-                        >
-                            <Select
-                                showSearch
-                                placeholder="Select a Brand first"
-                                optionFilterProp="label"
-                                onChange={onChange}
-                                onSearch={onSearch}
-                                options={filtersOptions}
-                            />
-                        </Form.Item>
-                    </Col>
+        {/* Name and Description */}
+        <Row gutter={16}>
+          <Col span={10}>
+            <Form.Item
+              label="Product Name"
+              name="name"
+              rules={[{ required: true, message: "Please enter a product name!" }]}
+            >
+              <Input placeholder="Enter product name" />
+            </Form.Item>
+          </Col>
+          <Col span={10}>
+            <Form.Item
+              label="Description"
+              name="description"
+              rules={[{ required: true, message: "Please input a description!" }]}
+            >
+              <Input placeholder="Enter some details about it..." />
+            </Form.Item>
+          </Col>
+        </Row>
 
-                </Row>
+        {/* Image Upload */}
+        <Row>
+          <Col span={10}>
+            <Form.Item label="Product Image" name="image">
+              <Upload
+                listType="picture-card"
+                showUploadList={false}
+                beforeUpload={beforeUpload}
+                onChange={handleImageUpload}
+              >
+                {imagePreview ? (
+                  <img
+                    src={imagePreview}
+                    alt="Preview"
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  />
+                ) : (
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                    <PlusOutlined />
+                    <div style={{ marginTop: 8 }}>Upload</div>
+                  </div>
+                )}
+              </Upload>
+            </Form.Item>
+          </Col>
+        </Row>
 
-                <Row gutter={16}>
-                    <Col span={10}>
-                        <Form.Item
-                            label="Product Name"
-                            name="name"
-                            rules={[
-                                { required: true, message: "Please enter a Name!" },
-                            ]}
-                        >
-                            <Input placeholder="Enter product name" />
-                        </Form.Item>
-                    </Col>
-                    <Col span={10}>
-                        <Form.Item
-                            label="Description"
-                            name="description"
-                            rules={[
-                                { required: true, message: "Please input a description!" },
-                            ]}
-                        >
-                            <Input placeholder="Enter some details about it..." />
-                        </Form.Item>
-                    </Col>
-                </Row>
-
-                {/* Switch for Status */}
-                <Row>
-                    <Col span={12}>
-                        <Form.Item
-                            name="status"
-                            valuePropName="checked"
-                            style={{ textAlign: "left" }}
-                        >
-                            <Switch defaultChecked onChange={onSwitchChange} />
-                            <span style={{ marginLeft: 8 }}>
-                                Active (Uncheck to make this category inactive)
-                            </span>
-                        </Form.Item>
-                    </Col>
-                </Row>
-
-                {/* Submit Button */}
-                <Row>
-                    <Col span={5}>
-                        <Form.Item style={{ textAlign: "right" }}>
-                            <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
-                                Submit
-                            </Button>
-                        </Form.Item>
-                    </Col>
-                </Row>
-            </Form>
-        </div>
-    );
+        {/* Status and Submit */}
+        <Row gutter={16}>
+          <Col span={12}>
+            <Form.Item name="status" valuePropName="checked">
+              <Switch defaultChecked />
+              <span style={{ marginLeft: 8 }}>Active (Uncheck to make inactive)</span>
+            </Form.Item>
+          </Col>
+          <Col span={5}>
+            <Form.Item>
+              <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
+                Submit
+              </Button>
+            </Form.Item>
+          </Col>
+        </Row>
+      </Form>
+    </div>
+  );
 };
