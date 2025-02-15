@@ -279,9 +279,9 @@ function Header({
 
   return (
     <>
-      <div className="setting-drwer" onClick={showDrawer}>
+      {/* <div className="setting-drwer" onClick={showDrawer}>
         {setting}
-      </div>
+      </div> */}
       <Row gutter={[24, 0]}>
         <Col span={24} md={6}>
           <Breadcrumb items={getBreadcrumbItems(name)} />
@@ -294,8 +294,10 @@ function Header({
             </span>
           </div>
         </Col>
+        
         <Col span={24} md={18} className="header-control">
-          <Badge size="small" count={4}>
+          
+          {/* <Badge size="small" count={4}>
             <Dropdown menu={menu} trigger={["click"]}>
               <a
                 href="#pablo"
@@ -305,18 +307,21 @@ function Header({
                 {bell}
               </a>
             </Dropdown>
-          </Badge>
-          <Button type="link" onClick={showDrawer}>
+          </Badge> */}
+          
+          {/* <Button type="link" onClick={showDrawer}>
             {logsetting}
-          </Button>
-          <Button
+          </Button> */}
+          
+          {/* <Button
             type="link"
             className="sidebar-toggler"
             onClick={() => onPress()}
           >
             {toggler}
-          </Button>
-          <Drawer
+          </Button> */}
+          
+          {/* <Drawer
             className="settings-drawer"
             mask={true}
             width={360}
@@ -422,16 +427,16 @@ function Header({
                 </div>
               </div>
             </div>
-          </Drawer>
+          </Drawer> */}
           <Link to="/sign-in" className="btn-sign-in">
             {profile}
             <span>Sign in</span>
           </Link>
-          <Input
+          {/* <Input
             className="header-search"
             placeholder="Type here..."
             prefix={<SearchOutlined />}
-          />
+          /> */}
         </Col>
       </Row>
     </>

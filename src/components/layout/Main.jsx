@@ -32,40 +32,36 @@ function Main({ children }) {
 
   return (
     <Layout
-      className={`layout-dashboard ${
-        pathname === "profile" ? "layout-profile" : ""
-      } ${pathname === "rtl" ? "layout-dashboard-rtl" : ""}`}
+      className={`layout-dashboard ${pathname === "profile" ? "layout-profile" : ""
+        } `}
     >
-      <Drawer
+      {/* <Drawer
         title={false}
         placement={placement === "right" ? "left" : "right"}
-        closable={false}
+        closable={true}
         onClose={() => setVisible(false)}
         open={visible}
         key={placement === "right" ? "left" : "right"}
         width={250}
-        className={`drawer-sidebar ${
-          pathname === "rtl" ? "drawer-sidebar-rtl" : ""
-        } `}
+        className={`drawer-sidebar`}
       >
         <Layout
-          className={`layout-dashboard ${
-            pathname === "rtl" ? "layout-dashboard-rtl" : ""
-          }`}
+          className={`layout-dashboard`}
         >
           <Sider
             trigger={null}
             width={250}
             theme="light"
-            className={`sider-primary ant-layout-sider-primary ${
-              sidenavType === "#fff" ? "active-route" : ""
-            }`}
+            className={`sider-primary ant-layout-sider-primary ${sidenavType === "#fff" ? "active-route" : ""
+              }`}
             style={{ background: sidenavType }}
           >
             <Sidenav color={sidenavColor} />
           </Sider>
         </Layout>
-      </Drawer>
+      </Drawer> */}
+    
+
       <Sider
         breakpoint="lg"
         collapsedWidth="0"
@@ -75,15 +71,17 @@ function Main({ children }) {
         trigger={null}
         width={250}
         theme="light"
-        className={`sider-primary ant-layout-sider-primary ${
-          sidenavType === "#fff" ? "active-route" : ""
-        }`}
+        className={`sider-primary ant-layout-sider-primary ${sidenavType === "#fff" ? "active-route" : ""
+          }`}
         style={{ background: sidenavType }}
       >
         <Sidenav color={sidenavColor} />
       </Sider>
+
+
+      
       <Layout>
-        {fixed ? (
+        {/* {fixed ? (
           <Affix>
             <AntHeader className={`${fixed ? "ant-header-fixed" : ""}`}>
               <Header
@@ -96,20 +94,20 @@ function Main({ children }) {
               />
             </AntHeader>
           </Affix>
-        ) : (
-          <AntHeader className={`${fixed ? "ant-header-fixed" : ""}`}>
-            <Header
-              onPress={openDrawer}
-              name={pathname}
-              subName={pathname}
-              handleSidenavColor={handleSidenavColor}
-              handleSidenavType={handleSidenavType}
-              handleFixedNavbar={handleFixedNavbar}
-            />
-          </AntHeader>
-        )}
+        ) : ( */}
+        <AntHeader className={"ant-header-fixed"}>
+          <Header
+            onPress={openDrawer}
+            name={pathname}
+            subName={pathname}
+            handleSidenavColor={handleSidenavColor}
+            handleSidenavType={handleSidenavType}
+            handleFixedNavbar={handleFixedNavbar}
+          />
+        </AntHeader>
+        {/* )} */}
         <Content className="content-ant">{children}</Content>
-        <Footer />
+        {/* <Footer /> */}
       </Layout>
     </Layout>
   );
