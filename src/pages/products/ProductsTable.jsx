@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import CustomTable from "../../components/CustomTable";
-import { Avatar, Select, Typography } from "antd";
+import { Avatar, Button, InputNumber, Select, Space, Tooltip, Typography } from "antd";
 import ava1 from "../../assets/images/logo-shopify.svg";
+import { DeleteOutlined, DollarOutlined, EditOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 
 const { Title, Text } = Typography;
 const ProductsTable = () => {
@@ -69,17 +70,66 @@ const ProductsTable = () => {
             render: (status) => status? 'Active' : 'Inactive',
         },
         {
-            title: "",
+            title: "Quantity",
+            dataIndex: "quantity",
+            key: "quantity",
+            render: (_, product) => (
+              <InputNumber
+                min={0}
+                defaultValue={product.quantity || 0}
+                addonBefore={<ShoppingCartOutlined />}
+                placeholder="Set quantity"
+                onChange={(value) => {
+                  console.log("Updated Quantity:", value);
+                }}
+              />
+            ),
+          },
+          
+          // Price Column
+          {
+            title: "Price",
+            dataIndex: "price",
+            key: "price",
+            render: (_, product) => (
+              <InputNumber
+                min={0}
+                defaultValue={product.price || 0}
+                addonBefore={<DollarOutlined />}
+                placeholder="Set price"
+                onChange={(value) => {
+                  console.log("Updated Price:", value);
+                }}
+              />
+            ),
+          },
+          {
+            title: "Actions",
             dataIndex: "action",
             key: "action",
             render: (_, record) => (
-                <span>
-                    <a href="#">Edit</a>
-                    <span className="ant-divider" />
-                    <a href="#">Delete</a>
-                </span>
-            )
-        },
+              <Space size="middle">
+                {/* Edit Button */}
+                <Tooltip title="Edit">
+                  <Button
+                    type="primary"
+                    icon={<EditOutlined />}
+                    onClick={() => handleEdit(record)}
+                  />
+                </Tooltip>
+                
+                {/* Delete Button */}
+                <Tooltip title="Delete">
+                  <Button
+                    type="primary"
+                    danger
+                    icon={<DeleteOutlined />}
+                    onClick={() => handleDelete(record)}
+                  />
+                </Tooltip>
+              </Space>
+            ),
+          },
     ];
 
     const data = [
