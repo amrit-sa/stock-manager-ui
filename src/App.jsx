@@ -14,6 +14,8 @@ import Organization from "./pages/organization/organization";
 import Categories from "./pages/category";
 import Brands from "./pages/brands";
 import Products from "./pages/products";
+import Reports from "./pages/reports";
+import Billings from "./pages/billings";
 
 function App() {
   return (
@@ -22,12 +24,14 @@ function App() {
         <Route path="/sign-up" exact component={SignUp} />
         <Route path="/sign-in" exact component={SignIn} />
         <Main>
-        <Route exact path="/dashboard" component={Home} />
-        <Route exact path="/organization" component={Organization} />
-        <Route exact path="/categories" component={Categories} />
-        <Route exact path="/products" component={Products} />
-        <Route exact path="/brands" component={Brands} />
-        <Route exact path="/tables" component={Tables} />
+          <Route exact path="/dashboard" component={Home} />
+          <Route exact path="/organization" component={Organization} />
+          <Route exact path="/categories" component={Categories} />
+          <Route exact path="/products" component={Products} />
+          <Route exact path="/brands" component={Brands} />
+          <Route exact path="/reports" component={Reports} />
+          <Route exact path="/billings" component={Billings} />
+          <Route exact path="/tables" component={Tables} />
           <Route exact path="/billing" component={Billing} />
           <Route exact path="/rtl" component={Rtl} />
           <Route exact path="/profile" component={Profile} />
