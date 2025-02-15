@@ -3,6 +3,7 @@ import CustomTable from "../../components/CustomTable";
 import { Avatar, Button, InputNumber, Select, Space, Tooltip, Typography } from "antd";
 import ava1 from "../../assets/images/logo-shopify.svg";
 import { DeleteOutlined, DollarOutlined, EditOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import { ProductInfoColumn } from "../../components/ProductInfoColumn";
 
 const { Title, Text } = Typography;
 const ProductsTable = () => {
@@ -36,22 +37,7 @@ const ProductsTable = () => {
             title: "Product",
             dataIndex: "product",
             key: "product",
-            render: (_, product) => (
-                <>
-                  <Avatar.Group>
-                    <Avatar
-                      className="shape-avatar"
-                      shape="square"
-                      size={40}
-                      src={product?.img || null}
-                    ></Avatar>
-                    <div className="avatar-info">
-                      <Title level={5}>{product.name || ''}</Title>
-                      <p>{product.description || ''}</p>
-                    </div>
-                  </Avatar.Group>{" "}
-                </>
-              )
+            render: (_, product) => <ProductInfoColumn product={product} />
         },
         {
             title: "Brand",
