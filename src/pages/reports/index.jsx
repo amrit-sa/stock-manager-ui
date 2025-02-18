@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, Col, Row, Typography, Table, Button, Select, List } from "antd";
-import { BarChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts"; // For charts
 import LineChart from "./ProductsChart";
 import EChart from "./salesChart";
 
